@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/editProduct.css">
+    <title>Document</title>
+</head>
+<body>
+    <form action="editProduct" method="post">
+        <h2>Edit Form</h2>
+        <form action="/submit_product" method="post" enctype="multipart/form-data">
+          <label for="productName">Product Name:</label>
+          <input type="text" id="productName" name="productName" required />
+          <label for="productDescription">Product Description:</label>
+          <textarea
+            id="productDescription"
+            name="productDescription"
+            rows="4"
+            required
+          ></textarea>
+          <label for="productPrice">Product Price:</label>
+          <input
+            type="number"
+            id="productPrice"
+            name="productPrice"
+            step="0.01"
+            required
+          />
+          <label for="productQuantity">Product Quantity:</label>
+          <input
+            type="number"
+            id="productQuantity"
+            name="productQuantity"
+            required
+          />
+          <label for="imageUrl">Image</label>
+          <input
+            type="file"
+            id="imageUrl"
+            name="productImage"
+            accept="image/*"
+            required
+          />
+          <button type="submit">Add Product</button>
+        </form>
+    </form>
+</body>
+</html>
