@@ -1,48 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/showProduct.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/showProduct.css" />
     <title>Document</title>
-</head>
-<body>
-    <form action="/showProduct" method="post">
-        <header>
-            <h1>Admin Product Page</h1>
-        </header>
-        <section>
-            <h2>Product List</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Image</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                   
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>    <img src="" alt="" width="50" height="50">
-                        </td>
-                        <td>
-                            <button>Edit </button>
+  </head>
+  <body>
+    <!-- <form action="/showProduct" method="post"> -->
+      <header>
+        <h1>Admin Product Page</h1>
+      </header>
+      <section>
+        <h2>Product List</h2>
+        <table>
+          <% if (products && products.length > 0){ %>
+          <thead>
+            <tr>
+              <th>Product name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Image</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% products.forEach(product =>{ %>
 
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-               
-                    <!-- Add more product rows as needed -->
-                </tbody>
-            </table>
-        </section>
-    </form>
-    
-</body>
+            <tr>
+              <td><%= product.productName %></td>
+              <td><%= product.productDescription %></td>
+              <td><%= product.productPrice %></td>
+              <td>
+                <img
+                  src="<%= product.productImage %>"
+                  alt="<%= product.productName %> "
+                  width="100"
+                  height="100"
+                />
+              </td>
+
+              <td>
+                <a href="/admin/editProduct/<%= product._id %>"><button>Edit</button></a>
+                
+               <form action="/admin/deleteProduct/<%= product._id%>" method="post">
+                <button>Delete</button>
+               </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+          <% } else { %>
+          <p>No products available.</p>
+          <% } %>
+        </table>
+      </section>
+    <!-- </form> -->
+  </body>
 </html>

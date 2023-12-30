@@ -5,13 +5,13 @@ body {
     background-color: #F4F4F4;
 }
 header {
-    background-color:  #89E90B;
+    background-color:  #11eccf;
     color: #fff;
     text-align: center;
     padding: 10px;
 }
 nav a {
-    color:  #89E90B;
+    color:  #11eccf;;
     text-decoration: none;
     padding: 10px;
     margin-right: 10px;
@@ -31,9 +31,18 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 th {
-    background-color:  #89E90B;
+    background-color:  #11eccf;;;
     color: #fff;
 }
 tr:hover {
     background-color: #F5F5F5;
+}
+h2{
+    text-align: center;
+}
+button{
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    margin-left: 20px;
 }

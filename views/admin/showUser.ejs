@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/showUsers.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/showUsers.css" />
     <title>User List</title>
-</head>
-<body>
-   <form action="/showUser" method="post">
-    <div class="container">
-        <h2>User List Form</h2>
+  </head>
+  <body>
+    <form action="/showUser" method="post">
+      <div class="container">
+        <h2>User List </h2>
         <form>
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" required><br>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required><br>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" required><br>
-            <input type="submit" value="Add User">
+          <% users.forEach(user => { %>
+            <div class="profile-container">
+              <h1>User Profile</h1>
+              <div class="profile-info">
+                <ul>
+                  <li><strong>Username:</strong> <%= user.name %></li>
+                  <li><strong>Email:</strong> <%= user.email %></li>
+                </ul>
+              </div>
+            </div>
+          <% }); %>
         </form>
-    </div>
-   </form>
-</body>
+      </div>
+    </form>
+  </body>
 </html>

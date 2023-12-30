@@ -41,7 +41,6 @@ let object = {
     try {
       console.log(req.body);
       const check = await userDetails.findOne({ email: req.body.username });
-      console.log(check);
       if (!check) {
         return res.send("you don't have account please singup");
       }
@@ -53,7 +52,6 @@ let object = {
         res.send("wrong password");
       } else {
         if(check.role==="admin"){
-          console.log("sd");
           res.redirect("/admin/home")
         }else if(check.role==="user"){
           res.redirect("user/userPage")

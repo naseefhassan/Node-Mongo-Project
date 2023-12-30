@@ -1,41 +1,43 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #F4F4F4;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-}
-.container {
-    width: 50%;
-    margin: 50px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-h2 {
-    text-align: center;
-    color: #333;
-}
-form {
     display: flex;
-    flex-direction: column;
-}
-label {
-    margin-bottom: 8px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .profile-container {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
+
+  }
+
+  .profile-container h1 {
+    color: #333;
+  }
+
+  .profile-info {
+    margin-top: 20px;
+  }
+
+  .profile-info p {
+    margin: 10px 0;
+    font-size: 18px;
     color: #555;
-}
-input {
-    padding: 8px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-}
-input[type="submit"]:hover {
-    background-color: #45A049;
-}
+  }
+  h1{
+    font-size: 15px;
+  }
+  ul{
+    text-align: left;
+  }
+  h2{
+    text-align: center;
+  }
