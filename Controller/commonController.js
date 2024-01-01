@@ -5,11 +5,19 @@ const validation = require("../validation/validation");
 
 let object = {
   getSignup: (req, res) => {
-    res.render("signup");
+    if (req.session.token) {
+      res.redirect("user/userPage");
+    } else {
+      res.render("signup");
+    }
   },
 
   getLogin: (req, res) => {
-    res.render("login");
+    if (req.session.token) {
+      res.redirect("user/userpage");
+    } else {
+      res.render("login");
+    }
   },
   getUser: (req, res) => {
     res.render("user");
@@ -21,28 +29,26 @@ let object = {
       const existinguser = await userDetails.findOne({ email: email });
       if (existinguser) {
         return res.send("you have already a account,Please login");
-
       } else {
-
         const saltRounds = 10;
         const hashpassword = await bcrypt.hash(password, saltRounds);
 
         const data = {
-            name: name,
-            email: email,
-            password: hashpassword,
+          name: name,
+          email: email,
+          password: hashpassword,
         };
         const userdata = await userDetails.insertMany([data]);
-        // req.session.userId=data._id
-        res.redirect("/user");
+        const userIDfind = await userDetails.findOne({ email: email });
+        const userId = userIDfind._id;
+        req.session.token = userId;
+        res.redirect("user/userPage");
       }
     });
   },
   // loin user
   postLogin: async (req, res) => {
-    
     try {
-      console.log(req.body);
       const check = await userDetails.findOne({ email: req.body.username });
       if (!check) {
         return res.send("you don't have account please singup");
@@ -54,10 +60,15 @@ let object = {
       if (!passwordmatch) {
         res.send("wrong password");
       } else {
-        if(check.role==="admin"){
-          res.redirect("/admin/home")
-        }else if(check.role==="user"){
-          res.redirect("user/userPage")
+        req.session.token = check._id;
+
+        if (check.role === "admin") {
+          req.session.IsAdmin = true;
+          res.redirect("/admin/home");
+        } else {
+          req.session.token = check._id;
+
+          res.redirect("user/userPage");
         }
       }
     } catch {

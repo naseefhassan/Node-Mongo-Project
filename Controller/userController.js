@@ -3,13 +3,17 @@ const userDetails = require("../models/userschema");
 
 let object = {
   userPage: async (req, res) => {
-        // console.log(userId);
+    if(req.session.token ){
+
       try{
-        const products = await productDetails.find()
+        const products = await productDetails.find({})
         res.render("user/userhome",{products});
       } catch(error){
-         return res.status(500).send("internal server error ")
+        return res.status(500).send("internal server error ")
       }
+    }else{
+      res.redirect("/login")
+    }
   
  
   },
@@ -24,9 +28,15 @@ let object = {
     })
   },
   profile:async(req,res)=>{
-    const userId=req.params.id
-    const user =await userDetails.findOne(userId)
-    res.render("user/profileUpdate",{user})
+    if(req.session.token){
+
+      const userId=req.params.id
+      const user =await userDetails.findOne(userId)
+      res.render("user/profileUpdate",{user})
+    }else{
+      res.redirect("/login")
+
+    }
      
   }
 };
