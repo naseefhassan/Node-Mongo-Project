@@ -1,43 +1,56 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+  font-family: "Arial", sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
 
-  .profile-container {
-    text-align: center;
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 5px;
+.container {
+  display: flex;
+  /* justify-content: space-around;  */
+  align-items: center;
+  flex-wrap: wrap; /* Allow items to wrap to the next line if there's not enough space */
+}
 
-  }
+.profile-container {
+  margin-left: 25px;
 
-  .profile-container h1 {
-    color: #333;
-  }
+  width: 260px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
 
-  .profile-info {
-    margin-top: 20px;
-  }
+.profile-container h1 {
+  color: #333;
+  font-size: 15px; /* Adjust as needed */
+  text-align: center; /* Align the heading text to the left */
+}
 
-  .profile-info p {
-    margin: 10px 0;
-    font-size: 18px;
-    color: #555;
-  }
-  h1{
-    font-size: 15px;
-  }
-  ul{
-    text-align: left;
-  }
-  h2{
-    text-align: center;
-  }
+.profile-info {
+  margin-top: 20px;
+  text-align: left; /* Align the entire profile info to the left */
+}
+
+.profile-info p {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #555;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 8px;
+}
+
+h2 {
+  text-align: center;
+}

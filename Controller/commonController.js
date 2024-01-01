@@ -21,7 +21,9 @@ let object = {
       const existinguser = await userDetails.findOne({ email: email });
       if (existinguser) {
         return res.send("you have already a account,Please login");
+
       } else {
+
         const saltRounds = 10;
         const hashpassword = await bcrypt.hash(password, saltRounds);
 
@@ -31,13 +33,14 @@ let object = {
             password: hashpassword,
         };
         const userdata = await userDetails.insertMany([data]);
-        console.log(userdata);
+        // req.session.userId=data._id
         res.redirect("/user");
       }
     });
   },
   // loin user
   postLogin: async (req, res) => {
+    
     try {
       console.log(req.body);
       const check = await userDetails.findOne({ email: req.body.username });

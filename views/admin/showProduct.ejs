@@ -7,54 +7,31 @@
     <title>Document</title>
   </head>
   <body>
-    <!-- <form action="/showProduct" method="post"> -->
-      <header>
-        <h1>Admin Product Page</h1>
-      </header>
-      <section>
-        <h2>Product List</h2>
-        <table>
-          <% if (products && products.length > 0){ %>
-          <thead>
-            <tr>
-              <th>Product name</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Image</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% products.forEach(product =>{ %>
-
-            <tr>
-              <td><%= product.productName %></td>
-              <td><%= product.productDescription %></td>
-              <td><%= product.productPrice %></td>
-              <td>
-                <img
-                  src="<%= product.productImage %>"
-                  alt="<%= product.productName %> "
-                  width="100"
-                  height="100"
-                />
-              </td>
-
-              <td>
-                <a href="/admin/editProduct/<%= product._id %>"><button>Edit</button></a>
-                
-               <form action="/admin/deleteProduct/<%= product._id%>" method="post">
-                <button>Delete</button>
-               </form>
-              </td>
-            </tr>
-            <% }) %>
-          </tbody>
-          <% } else { %>
-          <p>No products available.</p>
-          <% } %>
-        </table>
-      </section>
-    <!-- </form> -->
+    <header>
+      <h1>Admin Product Page</h1>
+    </header>
+    <section>
+      <% if (products && products.length > 0) { %> <% products.forEach(function(product) { %>
+      <div class="product-box">
+        <img
+          src="<%= product.productImage %>"
+          alt="<%= product.productName %> "
+        />
+        <h2><%= product.productName %></h2>
+        <p><%= product.productDescription %></p>
+        <p>Price: <%= product.productPrice %></p>
+        <div class="btn">
+          <a href="/admin/editProduct/<%= product._id %>"
+            ><button>Edit</button></a
+          >
+          <form action="/admin/deleteProduct/<%= product._id %>" method="post">
+            <button>Delete</button>
+          </form>
+        </div>
+      </div>
+      <% }) %> <% } else { %>
+      <p>No products available.</p>
+      <% } %>
+    </section>
   </body>
 </html>
