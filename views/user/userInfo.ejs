@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/userInfo.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <p><strong>Name:</strong> <%= data.name %></p>
+      <p><strong>Email:</strong> <%= data.email %></p>
+
+      <% if ( profile.length > 0 && profile[0].profileDetails.length > 0) { %>
+      <% profile[0].profileDetails.forEach(profileDetails => { %>
+      <p><strong>Date of Birth:</strong> <%= profileDetails.DOB %></p>
+      <p><strong>Age:</strong> <%= profileDetails.age %></p>
+      <p><strong>Gender:</strong> <%= profileDetails.Gender %></p>
+      <p><strong>Phone Number:</strong> <%= profileDetails.PhoneNumber %></p>
+      <% }); %> <% } else { %>
+      <p>No profile</p>
+      <% } %>
+      
+        <a href="/user/profile"><button type="submit">Update</button></a>
+        <a href="/user/userPage"><button>Home</button></a>
+      
+    </div>
+  </body>
+</html>

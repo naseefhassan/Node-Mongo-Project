@@ -1,44 +1,122 @@
+
 const productDetails = require("../models/ProductSchema");
 const userDetails = require("../models/userschema");
+const profile = require("../models/profiileSchema");
+const { default: mongoose } = require("mongoose");
 
-let object = {
+const object = {
   userPage: async (req, res) => {
-    if(req.session.token ){
-
-      try{
-        const products = await productDetails.find({})
-        res.render("user/userhome",{products});
-      } catch(error){
-        return res.status(500).send("internal server error ")
+    if (req.session.token) {
+      try {
+        const products = await productDetails.find({});
+        res.render("user/userhome", { products });
+      } catch (error) {
+        return res.status(500).send("Internal server error");
       }
-    }else{
-      res.redirect("/login")
+    } else {
+      res.redirect("/login");
     }
+  },
+
+  logout: (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        console.log("Session destroyed");
+      } else {
+        res.redirect("/login");
+        console.log("Session ended");
+      }
+    });
+  },
+
+  userInfo: async (req, res) => {
+    try {
+      if (req.session.token) {
+        const data = await userDetails.findOne({ _id: req.session.token });
+        console.log(data._id);
   
- 
-  },
-  logout:(req,res)=>{
-    req.session.destroy((err)=>{
-      if(err){
-        console.log("session destoyed");
-      } else{
-        res.redirect("/login")
-        console.log("session ended");
+        if (data) {
+          // Fetch profile details here and pass them to the render method
+          const profile = await userDetails.aggregate([
+            { $match: { _id: new mongoose.Types.ObjectId(data._id ) } },
+            {
+              $lookup: {
+                from: "profiles",
+                localField: "_id",
+                foreignField: "UserId",
+                as: "profileDetails",
+              },
+            },
+          ]);
+  console.log(profile);
+          res.render("user/userInfo", { data, profile });
+        } else {
+          res.status(404).send("User not found");
+        }
       }
-    })
-  },
-  profile:async(req,res)=>{
-    if(req.session.token){
-
-      const userId=req.params.id
-      const user =await userDetails.findOne(userId)
-      res.render("user/profileUpdate",{user})
-    }else{
-      res.redirect("/login")
-
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+      res.status(500).send("Internal server error");
     }
-     
-  }
+  },
+  
+
+  profile: async (req, res) => {
+    try {
+      if (req.session.token) {
+        const userId = req.session.token;
+        const user = await userDetails.findOne({ _id: userId });
+  
+        // Ensure that user is found before proceeding
+        if (user) {
+          const profile = await userDetails.aggregate([
+            { $match: { _id: new mongoose.Types.ObjectId(user._id) } },
+            {
+              $lookup: {
+                from: "profiles",
+                localField: "_id",
+                foreignField: "UserId",
+                as: "profileDetails",
+              },
+            },
+          ]);
+  
+          res.render("user/profileUpdate", { user, Profile :profile});
+        } else {
+          res.status(404).send("User not found");
+        }
+      } else {
+        res.redirect("/login");
+      }
+    } catch (error) {
+      console.error("Error in profile route:", error);
+      res.status(500).send("Internal server error");
+    }
+  },
+  
+
+  postProfile: async (req, res) => {
+    try {
+      const { name, email, DOB, age, Gender, PhoneNumber } = req.body;
+      console.log(req.body);
+      
+      await userDetails.updateOne({ _id: req.session.token }, { $set: { name, email } });
+
+      const UserId = req.session.token;
+
+      await profile.updateOne(
+        { UserId },
+        { $set: { UserId, DOB, age, Gender, PhoneNumber } },
+        { upsert: true }
+      );
+
+      const data = { name, email };
+      res.redirect("/user/userInfo");
+    } catch (error) {
+      console.error("Error in postProfile route:", error);
+      res.status(500).send("Internal server error");
+    }
+  },
 };
 
 module.exports = object;
