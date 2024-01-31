@@ -11,10 +11,4 @@ router.get("/userInfo",userInfo)
 
 
 
-
-
-
-
-
-
 module.exports=router

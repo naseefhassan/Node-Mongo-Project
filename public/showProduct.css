@@ -54,11 +54,7 @@ button:hover {
   justify-content: center;
   gap: 10px;
 }
-.head{
+.head {
   display: flex;
-  justify-content: space-around
-  
-  
-  
-  ;
+  justify-content: space-around;
 }

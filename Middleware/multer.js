@@ -1,19 +1,23 @@
 const multer = require("multer");
-const path=require("path")
+const path = require("path");
 
-let storage
+let storage;
 try {
-   storage = multer.diskStorage({
+  storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, "public/product-images");
     },
     filename: function (req, file, cb) {
-      cb(null, file.fieldname + "-" + Date.now() +path.extname( file.originalname));
+      cb(
+        null,
+        file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+      );
     },
   });
 } catch (error) {
-  console.log("Multer  error")
+  console.log("Multer  error");
 }
+
 
 const upload = multer({ storage: storage });
 

@@ -67,7 +67,6 @@ let object = {
           res.redirect("/admin/home");
         } else {
           req.session.token = check._id;
-
           res.redirect("user/userPage");
         }
       }

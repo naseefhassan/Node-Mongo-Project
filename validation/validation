@@ -6,10 +6,10 @@ function middleware(req, res, next) {
 
   const isValidEmail = emailRegex.test(email);
   const isValidPassword = passwordRegex.test(password);
-  
-   if(!isValidEmail || !isValidPassword){
-    return res.status(400).send("invalid email or password format")
-   }
+
+  if (!isValidEmail || !isValidPassword) {
+    return res.status(400).send("invalid email or password format");
+  }
   next();
 }
 module.exports = middleware;

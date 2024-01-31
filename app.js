@@ -4,7 +4,7 @@ const path = require("path");
 const port = 4000;
 const nocache = require("nocache");
 const session = require("express-session");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

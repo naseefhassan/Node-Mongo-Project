@@ -13,7 +13,7 @@
 
       <% if ( profile.length > 0 && profile[0].profileDetails.length > 0) { %>
       <% profile[0].profileDetails.forEach(profileDetails => { %>
-      <p><strong>Date of Birth:</strong> <%= profileDetails.DOB %></p>
+      <p><strong>DOB:</strong> <%= profileDetails.DOB %></p>
       <p><strong>Age:</strong> <%= profileDetails.age %></p>
       <p><strong>Gender:</strong> <%= profileDetails.Gender %></p>
       <p><strong>Phone Number:</strong> <%= profileDetails.PhoneNumber %></p>
@@ -23,7 +23,7 @@
       
         <a href="/user/profile"><button type="submit">Update</button></a>
         <a href="/user/userPage"><button>Home</button></a>
+      </div>
       
-    </div>
   </body>
 </html>
